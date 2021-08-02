@@ -1,0 +1,25 @@
+from django import forms  
+class StudentForm(forms.Form):  
+    newlist = forms.CharField(label="newlist",max_length=50)
+
+from django.shortcuts import render  
+from myapp.form import StudentForm  
+  
+def index(request):  
+    student = StudentForm()  
+    return render(request,"index.html",{'form':student})  
+
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Index</title>  
+</head>  
+<body>  
+<form method="POST" class="post-form">  
+        {% csrf_token %}  
+        {{ form.as_p }}  
+        <button type="submit" class="save btn btn-default">Save</button>  
+</form>  
+</body>  
+</html>  
